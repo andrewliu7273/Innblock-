@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Soft city skyline</title>
+  <desc id="desc">A muted city skyline used as a quiet background for the product stage.</desc>
+  <defs>
+    <linearGradient id="glass" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#d9e2ea"/>
+      <stop offset="1" stop-color="#aab6c2"/>
+    </linearGradient>
+    <linearGradient id="shadow" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#87929d"/>
+      <stop offset="1" stop-color="#5d6670"/>
+    </linearGradient>
+  </defs>
+  <path d="M0 388h1200v32H0z" fill="#767f88" opacity=".34"/>
+  <g opacity=".72">
+    <rect x="24" y="222" width="78" height="166" rx="8" fill="url(#shadow)"/>
+    <rect x="124" y="152" width="94" height="236" rx="10" fill="url(#glass)"/>
+    <rect x="244" y="198" width="64" height="190" rx="8" fill="#8f9ba6"/>
+    <rect x="334" y="104" width="116" height="284" rx="12" fill="url(#shadow)"/>
+    <rect x="480" y="172" width="82" height="216" rx="8" fill="url(#glass)"/>
+    <rect x="586" y="126" width="132" height="262" rx="12" fill="#98a5b0"/>
+    <rect x="742" y="74" width="90" height="314" rx="12" fill="url(#glass)"/>
+    <rect x="858" y="182" width="76" height="206" rx="8" fill="#7c8792"/>
+    <rect x="960" y="116" width="120" height="272" rx="12" fill="url(#shadow)"/>
+    <rect x="1104" y="210" width="72" height="178" rx="8" fill="#a5b0ba"/>
+  </g>
+  <g opacity=".36" fill="#ffffff">
+    <path d="M44 246h38v8H44zm0 28h38v8H44zm0 28h38v8H44zm0 28h38v8H44z"/>
+    <path d="M150 178h16v160h-16zm32 0h16v160h-16z"/>
+    <path d="M362 134h18v220h-18zm34 0h18v220h-18z"/>
+    <path d="M506 196h12v160h-12zm26 0h12v160h-12z"/>
+    <path d="M614 154h18v202h-18zm36 0h18v202h-18zm36 0h18v202h-18z"/>
+    <path d="M768 104h14v242h-14zm26 0h14v242h-14z"/>
+    <path d="M988 146h18v206h-18zm36 0h18v206h-18z"/>
+  </g>
+  <g fill="none" stroke="#353b40" stroke-width="2" opacity=".18">
+    <path d="M24 388h1152"/>
+    <path d="M330 104h124M742 74h90M960 116h120"/>
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" role="img" aria-labelledby="title desc">
+  <title id="title">Lobby drawer module</title>
+  <desc id="desc">A lower display room with storage drawers and figure stands.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#efe9df"/>
+      <stop offset="1" stop-color="#dcd5cb"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".04"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="330" rx="24" fill="#242a30"/>
+  <rect x="18" y="18" width="604" height="294" rx="18" fill="url(#wall)"/>
+  <rect x="60" y="70" width="118" height="142" rx="12" fill="#58616a" opacity=".86"/>
+  <rect x="82" y="94" width="74" height="94" rx="8" fill="#d8e3eb" opacity=".54"/>
+  <rect x="218" y="98" width="322" height="18" rx="9" fill="#77695d"/>
+  <rect x="242" y="172" width="278" height="18" rx="9" fill="#77695d"/>
+  <rect x="218" y="230" width="322" height="44" rx="13" fill="#4c535b"/>
+  <path d="M248 252h72M360 252h72" stroke="#ffffff" stroke-opacity=".22" stroke-width="5" stroke-linecap="round"/>
+  <g fill="#2d3136">
+    <path d="M254 78c0-15 22-15 22 0v20h-22z"/>
+    <circle cx="265" cy="67" r="10"/>
+    <path d="M336 78c0-18 28-18 28 0v20h-28z"/>
+    <circle cx="350" cy="65" r="12"/>
+    <path d="M450 79c0-16 24-16 24 0v19h-24z"/>
+    <circle cx="462" cy="67" r="11"/>
+    <path d="M292 151c0-19 30-19 30 0v21h-30z"/>
+    <circle cx="307" cy="137" r="13"/>
+    <path d="M410 151c0-17 26-17 26 0v21h-26z"/>
+    <circle cx="423" cy="139" r="11"/>
+  </g>
+  <g fill="#a64235" opacity=".74">
+    <rect x="492" y="62" width="42" height="36" rx="10"/>
+    <rect x="542" y="156" width="34" height="72" rx="8"/>
+  </g>
+  <path d="M48 230h136" stroke="#252b30" stroke-width="9" stroke-linecap="round" opacity=".28"/>
+  <circle cx="88" cy="224" r="13" fill="#2d3136" opacity=".88"/>
+  <circle cx="146" cy="224" r="13" fill="#2d3136" opacity=".88"/>
+  <path d="M218 62h322" stroke="#fff3c5" stroke-width="5" stroke-linecap="round" opacity=".66"/>
+  <path d="M218 62h322" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity=".78"/>
+  <rect x="18" y="18" width="604" height="294" rx="18" fill="url(#glass)"/>
+  <path d="M76 26 24 240M202 24 92 310M586 36 516 306" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity=".14"/>
+  <rect x="18" y="18" width="604" height="294" rx="18" fill="none" stroke="#ffffff" stroke-opacity=".36"/>
+</svg>

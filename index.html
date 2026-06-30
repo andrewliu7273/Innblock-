@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en" data-levels="4">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>INNBLOCK Metro Stack Display Case</title>
+  <meta name="description" content="A product page for the INNBLOCK Metro Stack modular display case.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#product">Skip to product</a>
+
+  <header class="site-header" aria-label="Primary navigation">
+    <a class="brand" href="#overview" aria-label="INNBLOCK product page">
+      <img src="images/innblock-logo.svg" alt="" width="36" height="36">
+      <span>INNBLOCK</span>
+    </a>
+
+    <nav class="section-nav" aria-label="Product sections">
+      <a href="#overview">Product</a>
+      <a href="#build">Stack</a>
+      <a href="#details">Details</a>
+      <a href="#delivery">Delivery</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button" type="button" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m20 20-4.5-4.5m2-5A7.5 7.5 0 1 1 2.5 10.5a7.5 7.5 0 0 1 15 0Z"/></svg>
+      </button>
+      <button class="cart-button" type="button" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h2l2.2 10.5a2 2 0 0 0 2 1.6h6.9a2 2 0 0 0 1.9-1.4l1.2-5.2H7.3M10 21h.1M18 21h.1"/></svg>
+        <span class="cart-count" data-cart-count>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="product">
+    <section id="overview" class="floor-section product-hero" data-floor="1" aria-labelledby="product-title">
+      <div class="section-shell hero-grid">
+        <div class="city-stage" aria-label="Stacked apartment display case preview">
+          <img class="city-backdrop" src="images/city-skyline.svg" alt="" aria-hidden="true">
+
+          <div class="tower-card">
+            <div class="tower-topbar">
+              <span>Metro Stack</span>
+              <span data-selected-layout>4 floor kit</span>
+            </div>
+
+            <div class="display-tower" aria-label="Interactive stacked INNBLOCK display case">
+              <button class="tower-room top-extension" type="button" data-module="skyline" data-level="5" aria-label="Focus Skyline Nook module">
+                <span class="room-tag">05 / Skyline Nook</span>
+                <img src="images/module-skyline.svg" alt="A compact top display room with city windows and figure stands">
+              </button>
+              <button class="tower-room extra-floor is-active" type="button" data-module="gallery" data-level="4" aria-label="Focus Gallery Floor module">
+                <span class="room-tag">04 / Gallery Floor</span>
+                <img src="images/module-gallery.svg" alt="A modern glass display room with shelves and figures">
+              </button>
+              <button class="tower-room" type="button" data-module="lounge" data-level="3" aria-label="Focus Figure Lounge module">
+                <span class="room-tag">03 / Figure Lounge</span>
+                <img src="images/module-lounge.svg" alt="A clean apartment lounge display room with plinths for figurines">
+              </button>
+              <button class="tower-room" type="button" data-module="studio" data-level="2" aria-label="Focus Studio Shelf module">
+                <span class="room-tag">02 / Studio Shelf</span>
+                <img src="images/module-studio.svg" alt="A modular studio display shelf with rail lights and small figures">
+              </button>
+              <button class="tower-room" type="button" data-module="lobby" data-level="1" aria-label="Focus Lobby Drawer module">
+                <span class="room-tag">01 / Lobby Drawer</span>
+                <img src="images/module-lobby.svg" alt="A lower display room with drawer storage and two figure stands">
+              </button>
+            </div>
+
+            <div class="tower-base">
+              <span>hidden cable channel</span>
+              <span>magnetic stack lock</span>
+            </div>
+          </div>
+        </div>
+
+        <article class="buy-panel" aria-label="Product purchase options">
+          <p class="eyebrow">Modular figure display case</p>
+          <h1 id="product-title">Metro Stack Display Case</h1>
+          <p class="product-summary">A clean apartment-style display tower for figures, die-cast pieces, art toys, and small collectibles. Stack rooms vertically, route lighting through the side spine, and keep the scene compact enough for a city apartment.</p>
+
+          <div class="rating-row" aria-label="Rated 4.9 out of 5 from 128 reviews">
+            <span aria-hidden="true">★★★★★</span>
+            <strong>4.9</strong>
+            <span class="review-count">128 reviews</span>
+          </div>
+
+          <div class="price-row">
+            <span class="price" data-price>$319</span>
+            <span class="price-note">ships as a flat packed stack kit</span>
+          </div>
+
+          <form class="product-form" aria-label="Configure Metro Stack Display Case">
+            <fieldset class="option-group" data-option-group="finish">
+              <legend>Finish <span data-selected-finish>Graphite frame</span></legend>
+              <div class="choice-row">
+                <button class="choice swatch is-selected" type="button" data-finish="graphite" aria-pressed="true"><span style="--swatch:#252b30"></span>Graphite</button>
+                <button class="choice swatch" type="button" data-finish="cloud" aria-pressed="false"><span style="--swatch:#ece8df"></span>Cloud</button>
+                <button class="choice swatch" type="button" data-finish="walnut" aria-pressed="false"><span style="--swatch:#8a5b3c"></span>Walnut</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="option-group" data-option-group="levels">
+              <legend>Stack height <span data-selected-height>4 floors</span></legend>
+              <div class="choice-row segmented">
+                <button class="choice" type="button" data-level-choice="3" aria-pressed="false">3 floors</button>
+                <button class="choice is-selected" type="button" data-level-choice="4" aria-pressed="true">4 floors</button>
+                <button class="choice" type="button" data-level-choice="5" aria-pressed="false">5 floors</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="option-group" data-option-group="light">
+              <legend>Light tone <span data-selected-light>Neutral white</span></legend>
+              <div class="choice-row segmented">
+                <button class="choice" type="button" data-light="warm" aria-pressed="false">Warm</button>
+                <button class="choice is-selected" type="button" data-light="neutral" aria-pressed="true">Neutral</button>
+                <button class="choice" type="button" data-light="cool" aria-pressed="false">Cool</button>
+              </div>
+            </fieldset>
+
+            <div class="purchase-row">
+              <div class="quantity-control" aria-label="Quantity selector">
+                <button type="button" data-quantity="minus" aria-label="Decrease quantity">-</button>
+                <output data-quantity-value aria-live="polite">1</output>
+                <button type="button" data-quantity="plus" aria-label="Increase quantity">+</button>
+              </div>
+              <button class="add-cart" type="button" data-add-cart>Add to cart</button>
+            </div>
+          </form>
+
+          <dl class="quick-specs">
+            <div><dt>Footprint</dt><dd>15.7 in x 11.8 in</dd></div>
+            <div><dt>Clearance</dt><dd>Up to 7.5 in per floor</dd></div>
+            <div><dt>Lighting</dt><dd>USB-C LED rail</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section id="build" class="floor-section" data-floor="2" aria-labelledby="build-title">
+      <div class="section-shell split-section">
+        <div class="section-copy">
+          <p class="eyebrow">Stack system</p>
+          <h2 id="build-title">Each room is a product module, stacked into one apartment tower.</h2>
+          <p>Choose a floor, swap a room, or add another block later. The city setting stays quiet so the product layout remains the focus.</p>
+        </div>
+
+        <div class="module-grid" aria-label="Included display modules">
+          <button class="module-card is-active" type="button" data-focus-module="gallery">
+            <img src="images/module-gallery.svg" alt="">
+            <span>Gallery Floor</span>
+            <strong>Adjustable shelf rails</strong>
+          </button>
+          <button class="module-card" type="button" data-focus-module="lounge">
+            <img src="images/module-lounge.svg" alt="">
+            <span>Figure Lounge</span>
+            <strong>Low plinth display zone</strong>
+          </button>
+          <button class="module-card" type="button" data-focus-module="studio">
+            <img src="images/module-studio.svg" alt="">
+            <span>Studio Shelf</span>
+            <strong>Rail light and backdrop</strong>
+          </button>
+          <button class="module-card" type="button" data-focus-module="lobby">
+            <img src="images/module-lobby.svg" alt="">
+            <span>Lobby Drawer</span>
+            <strong>Closed base storage</strong>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="details" class="floor-section" data-floor="3" aria-labelledby="details-title">
+      <div class="section-shell">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Product details</p>
+            <h2 id="details-title">Built like furniture, scaled for figures.</h2>
+          </div>
+          <p>Details are kept practical: dimensions, access, lighting, and expansion. No oversized lifestyle images.</p>
+        </div>
+
+        <div class="spec-grid">
+          <article class="spec-card">
+            <span>01</span>
+            <h3>Magnetic stacking frame</h3>
+            <p>Each block locks to the next with concealed magnets and alignment pins, keeping the tower visually clean.</p>
+          </article>
+          <article class="spec-card">
+            <span>02</span>
+            <h3>Front glass access</h3>
+            <p>Lift-off acrylic fronts make rearranging figures simpler without pulling the whole case apart.</p>
+          </article>
+          <article class="spec-card">
+            <span>03</span>
+            <h3>Side power spine</h3>
+            <p>A slim vertical channel routes lighting across floors so the stack reads like a small apartment elevator core.</p>
+          </article>
+          <article class="spec-card">
+            <span>04</span>
+            <h3>Apartment-friendly footprint</h3>
+            <p>The narrow base is designed for desks, media consoles, shelves, and small studio apartments.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="delivery" class="floor-section" data-floor="4" aria-labelledby="delivery-title">
+      <div class="section-shell delivery-layout">
+        <div>
+          <p class="eyebrow">Delivery and setup</p>
+          <h2 id="delivery-title">Flat packed, expandable, and ready for a city apartment.</h2>
+          <p class="delivery-copy">The case ships in labeled floor trays. Start with one stack and expand vertically as your collection grows.</p>
+        </div>
+
+        <div class="accordion" aria-label="Product information">
+          <button class="accordion-button is-open" type="button" aria-expanded="true">
+            What is in the box?
+            <span></span>
+          </button>
+          <div class="accordion-panel">
+            <p>Four display rooms, graphite frame parts, acrylic fronts, USB-C LED rail, magnetic stack locks, shelf pins, microfiber cloth, and assembly guide.</p>
+          </div>
+
+          <button class="accordion-button" type="button" aria-expanded="false">
+            How does the elevator scroll work on this page?
+            <span></span>
+          </button>
+          <div class="accordion-panel" hidden>
+            <p>The fixed elevator on the right acts as the visual page scrollbar. Its cabin moves as the page scrolls, and each floor button jumps to a product section.</p>
+          </div>
+
+          <button class="accordion-button" type="button" aria-expanded="false">
+            Can I add more floors later?
+            <span></span>
+          </button>
+          <div class="accordion-panel" hidden>
+            <p>Yes. Extra INNBLOCK rooms can stack above the base module, and the side power spine can continue through additional lighting floors.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="page-elevator" aria-label="Product page elevator scrollbar">
+    <span class="elevator-title">Elevator</span>
+    <div class="elevator-track" data-elevator-track>
+      <span class="elevator-line"></span>
+      <button class="floor-stop is-active" type="button" data-target="#overview" style="--stop:10%" aria-label="Go to product floor">1</button>
+      <button class="floor-stop" type="button" data-target="#build" style="--stop:36.66%" aria-label="Go to stack floor">2</button>
+      <button class="floor-stop" type="button" data-target="#details" style="--stop:63.33%" aria-label="Go to details floor">3</button>
+      <button class="floor-stop" type="button" data-target="#delivery" style="--stop:90%" aria-label="Go to delivery floor">4</button>
+      <div class="elevator-cab" data-elevator-cab aria-hidden="true"><span data-elevator-floor>1</span></div>
+    </div>
+  </aside>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

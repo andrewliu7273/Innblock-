@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">INNBLOCK mark</title>
+  <rect x="4" y="4" width="40" height="40" rx="9" fill="#fffdf8" stroke="#161718" stroke-width="2"/>
+  <path d="M14 16h12v12H14z" fill="#a64235" opacity=".92"/>
+  <path d="M22 10h12v12H22z" fill="#252b30" opacity=".92"/>
+  <path d="M22 26h12v12H22z" fill="#c8a24f" opacity=".95"/>
+  <path d="M14 16 22 10m4 6 8-6M14 28l8-6m4 6 8-6M22 38l12-16" fill="none" stroke="#fffdf8" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" role="img" aria-labelledby="title desc">
+  <title id="title">Figure lounge module</title>
+  <desc id="desc">A calm apartment lounge styled display room with figure plinths.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f2eee7"/>
+      <stop offset="1" stop-color="#ded8cf"/>
+    </linearGradient>
+    <linearGradient id="window" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#dce8f2"/>
+      <stop offset="1" stop-color="#9fb0bd"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".04"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="330" rx="24" fill="#242a30"/>
+  <rect x="18" y="18" width="604" height="294" rx="18" fill="url(#wall)"/>
+  <rect x="54" y="56" width="146" height="118" rx="10" fill="url(#window)"/>
+  <g stroke="#ffffff" stroke-width="5" opacity=".52">
+    <path d="M127 58v113M58 115h138"/>
+  </g>
+  <path d="M60 169c42-33 76-34 134-8" fill="none" stroke="#5e6974" stroke-width="10" stroke-linecap="round" opacity=".28"/>
+  <rect x="242" y="74" width="252" height="64" rx="18" fill="#56606a"/>
+  <rect x="262" y="106" width="276" height="62" rx="22" fill="#6d7780"/>
+  <rect x="284" y="158" width="210" height="34" rx="10" fill="#454b52"/>
+  <rect x="260" y="206" width="278" height="16" rx="8" fill="#78695d"/>
+  <rect x="286" y="222" width="16" height="42" rx="8" fill="#5a5048"/>
+  <rect x="494" y="222" width="16" height="42" rx="8" fill="#5a5048"/>
+  <rect x="80" y="226" width="120" height="14" rx="7" fill="#78695d"/>
+  <g fill="#2d3136">
+    <path d="M106 204c0-16 24-16 24 0v22h-24z"/>
+    <circle cx="118" cy="190" r="11"/>
+    <path d="M158 207c0-14 22-14 22 0v19h-22z"/>
+    <circle cx="169" cy="195" r="10"/>
+    <path d="M350 184c0-17 26-17 26 0v22h-26z"/>
+    <circle cx="363" cy="171" r="11"/>
+    <path d="M418 184c0-18 28-18 28 0v22h-28z"/>
+    <circle cx="432" cy="170" r="12"/>
+  </g>
+  <g fill="#a64235" opacity=".74">
+    <rect x="526" y="84" width="42" height="82" rx="12"/>
+    <rect x="218" y="206" width="34" height="36" rx="8"/>
+  </g>
+  <rect x="34" y="270" width="572" height="14" rx="7" fill="#333840" opacity=".2"/>
+  <path d="M245 52h306" stroke="#fff3c5" stroke-width="5" stroke-linecap="round" opacity=".66"/>
+  <path d="M245 52h306" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity=".78"/>
+  <rect x="18" y="18" width="604" height="294" rx="18" fill="url(#glass)"/>
+  <path d="M76 26 24 240M202 24 92 310M586 36 516 306" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity=".14"/>
+  <rect x="18" y="18" width="604" height="294" rx="18" fill="none" stroke="#ffffff" stroke-opacity=".36"/>
+</svg>
