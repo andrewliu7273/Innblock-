@@ -1,177 +1,413 @@
-const root = document.documentElement;
-const galleryButtons = Array.from(document.querySelectorAll('.thumb'));
-const floorButtons = Array.from(document.querySelectorAll('.floor-button'));
-const focusImage = document.getElementById('focusImage');
-const focusKicker = document.getElementById('focusKicker');
-const focusTitle = document.getElementById('focusTitle');
-const focusCopy = document.getElementById('focusCopy');
-const selectedFinish = document.getElementById('selectedFinish');
-const quantityValue = document.getElementById('quantityValue');
-const cartCount = document.getElementById('cartCount');
-const toast = document.getElementById('toast');
-
-let quantity = 1;
-let cartTotal = Number(cartCount?.textContent || 0);
-let toastTimer = 0;
-
-function updateScrollProgress() {
-  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-  root.style.setProperty('--page-progress', Math.min(1, Math.max(0, progress)).toFixed(4));
+:root {
+  --ink: #000;
+  --paper: #fff;
+  --line: 1px solid var(--ink);
+  --header-height: 74px;
+  --page-padding: clamp(20px, 4vw, 48px);
+  --tower-gap: 22px;
+  --floor-height: 236px;
 }
 
-let scrollTicking = false;
-function requestScrollUpdate() {
-  if (scrollTicking) return;
-  scrollTicking = true;
-  window.requestAnimationFrame(() => {
-    updateScrollProgress();
-    scrollTicking = false;
-  });
+* {
+  box-sizing: border-box;
 }
 
-function setActiveFloor(floor) {
-  floorButtons.forEach((button) => {
-    button.classList.toggle('is-active', button.dataset.floor === String(floor));
-  });
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
-function setFocus(button) {
-  if (!button) return;
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
 
-  galleryButtons.forEach((item) => item.classList.toggle('is-active', item === button));
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
 
-  const image = button.dataset.image;
-  const kicker = button.dataset.kicker;
-  const title = button.dataset.title;
-  const copy = button.dataset.copy;
-  const floor = button.dataset.floor;
+button,
+select {
+  color: inherit;
+  background: var(--paper);
+  border: var(--line);
+  border-radius: 0;
+  font: inherit;
+}
 
-  if (image) focusImage.src = image;
-  if (title) focusImage.alt = title;
-  if (kicker) focusKicker.textContent = kicker;
-  if (title) focusTitle.textContent = title;
-  if (copy) focusCopy.textContent = copy;
+button {
+  cursor: pointer;
+}
 
-  if (/^[1-4]$/.test(floor)) {
-    setActiveFloor(floor);
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: center;
+  min-height: var(--header-height);
+  padding: 12px var(--page-padding);
+  background: var(--paper);
+  border-bottom: var(--line);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 180px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.brand-mark {
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  border: var(--line);
+}
+
+.primary-nav {
+  display: flex;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 34px);
+  font-size: 15px;
+}
+
+.primary-nav a {
+  padding: 8px 0;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.text-control {
+  min-height: 38px;
+  padding: 7px 16px;
+}
+
+.text-control + .text-control {
+  margin-left: -1px;
+}
+
+.product-page {
+  padding: 32px var(--page-padding) 64px;
+}
+
+.page-intro {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(420px, 0.95fr);
+  gap: 32px;
+  align-items: end;
+  margin-bottom: 34px;
+}
+
+.section-label {
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.06;
+  letter-spacing: 0;
+}
+
+.intro-copy {
+  max-width: 620px;
+  margin: 10px 0 0;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.filter-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 18px;
+}
+
+.filter-bar label {
+  display: block;
+}
+
+.filter-bar span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.filter-bar select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+}
+
+.wireframe-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 104px;
+  gap: 24px;
+  align-items: start;
+}
+
+.tower-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(230px, 1fr));
+  gap: var(--tower-gap);
+  align-items: start;
+}
+
+.tower {
+  border: var(--line);
+  background: var(--paper);
+}
+
+.tower-header {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 42px;
+  padding: 8px 12px;
+  background: var(--paper);
+  border-bottom: var(--line);
+  font-weight: 700;
+}
+
+.tower-header span:last-child {
+  font-weight: 400;
+}
+
+.product-card {
+  display: grid;
+  grid-template-columns: minmax(132px, 1fr) minmax(106px, 34%);
+  min-height: var(--floor-height);
+  border-bottom: var(--line);
+}
+
+.product-card:last-child {
+  border-bottom: 0;
+}
+
+.image-slot {
+  display: grid;
+  place-items: center;
+  min-height: var(--floor-height);
+  padding: 16px;
+  text-align: center;
+  font-size: 15px;
+  border-right: var(--line);
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 10px 12px;
+  min-width: 0;
+}
+
+.floor-label {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.product-name {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.12;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.price {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.product-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.product-actions button {
+  min-height: 38px;
+  padding: 7px 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.product-actions button[aria-pressed="true"] {
+  outline: 2px solid var(--ink);
+  outline-offset: -5px;
+}
+
+.elevator {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  border: var(--line);
+  background: var(--paper);
+}
+
+.elevator-button {
+  min-height: 36px;
+  padding: 6px;
+}
+
+.elevator-rail {
+  position: relative;
+  height: 420px;
+  border: var(--line);
+}
+
+.elevator-car {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 0;
+  display: grid;
+  place-items: center;
+  height: 52px;
+  border: var(--line);
+  background: var(--paper);
+  font-size: 20px;
+  font-weight: 700;
+  transition: top 160ms ease;
+}
+
+.floor-readout {
+  margin: 0;
+  padding: 10px 6px;
+  text-align: center;
+  border: var(--line);
+  text-transform: uppercase;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  border: var(--line);
+  text-align: center;
+}
+
+@media (max-width: 1220px) {
+  .site-header {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .brand,
+  .primary-nav,
+  .header-actions {
+    justify-content: center;
+  }
+
+  .page-intro {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .tower-grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
   }
 }
 
-function thumbForFloor(floor) {
-  return galleryButtons.find((button) => button.dataset.floor === String(floor) && button.dataset.kicker !== 'Stack overview')
-    || galleryButtons.find((button) => button.dataset.floor === String(floor));
+@media (max-width: 760px) {
+  :root {
+    --floor-height: 236px;
+  }
+
+  .product-page {
+    padding-bottom: 132px;
+  }
+
+  .primary-nav {
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+
+  .filter-bar,
+  .tower-grid,
+  .wireframe-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .wireframe-shell {
+    gap: 18px;
+  }
+
+  .product-card {
+    grid-template-columns: minmax(0, 1fr) minmax(118px, 38%);
+  }
+
+  .elevator {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    z-index: 30;
+    grid-template-columns: 72px 1fr 90px 72px;
+    align-items: center;
+    border-right: 0;
+    border-left: 0;
+  }
+
+  .elevator-rail {
+    height: 42px;
+  }
+
+  .elevator-car {
+    top: 5px;
+    bottom: 5px;
+    left: 0;
+    right: auto;
+    width: 52px;
+    height: auto;
+    transition: left 160ms ease;
+  }
 }
 
-function showToast(message) {
-  if (!toast) return;
-  window.clearTimeout(toastTimer);
-  toast.textContent = message;
-  toast.classList.add('is-visible');
-  toastTimer = window.setTimeout(() => {
-    toast.classList.remove('is-visible');
-  }, 2600);
+@media (max-width: 520px) {
+  .product-card {
+    grid-template-columns: 1fr;
+  }
+
+  .image-slot {
+    min-height: 170px;
+    border-right: 0;
+    border-bottom: var(--line);
+  }
+
+  .product-info {
+    min-height: 174px;
+  }
 }
-
-galleryButtons.forEach((button) => {
-  button.addEventListener('click', () => setFocus(button));
-});
-
-floorButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const floor = button.dataset.floor;
-    const target = document.getElementById(`floor-${floor}`);
-    const thumb = thumbForFloor(floor);
-
-    setActiveFloor(floor);
-    setFocus(thumb);
-
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  });
-});
-
-document.querySelectorAll('[data-scroll-target]').forEach((button) => {
-  button.addEventListener('click', () => {
-    const targetName = button.dataset.scrollTarget;
-
-    if (targetName === 'top') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    const target = document.getElementById('stack-system');
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
-
-document.querySelectorAll('.finish').forEach((button) => {
-  button.addEventListener('click', () => {
-    document.querySelectorAll('.finish').forEach((item) => {
-      item.classList.toggle('is-active', item === button);
-      item.setAttribute('aria-checked', item === button ? 'true' : 'false');
-    });
-
-    if (selectedFinish) selectedFinish.textContent = button.dataset.finish || 'Selected';
-  });
-});
-
-document.querySelectorAll('.addon').forEach((button) => {
-  button.addEventListener('click', () => {
-    const selected = button.classList.toggle('is-selected');
-    button.setAttribute('aria-pressed', selected ? 'true' : 'false');
-    const label = button.dataset.addon || 'Add-on';
-    showToast(selected ? `${label} selected` : `${label} removed`);
-  });
-});
-
-document.querySelectorAll('[data-qty]').forEach((button) => {
-  button.addEventListener('click', () => {
-    if (button.dataset.qty === 'increase') quantity += 1;
-    if (button.dataset.qty === 'decrease') quantity = Math.max(1, quantity - 1);
-    if (quantityValue) quantityValue.textContent = String(quantity);
-  });
-});
-
-const addToCart = document.getElementById('addToCart');
-if (addToCart) {
-  addToCart.addEventListener('click', () => {
-    cartTotal += quantity;
-    if (cartCount) cartCount.textContent = String(cartTotal);
-    showToast(`${quantity} Living InnBlock ${quantity === 1 ? 'was' : 'were'} added to cart`);
-  });
-}
-
-const favoriteButton = document.querySelector('.favorite');
-if (favoriteButton) {
-  favoriteButton.addEventListener('click', () => {
-    favoriteButton.classList.toggle('is-active');
-    const active = favoriteButton.classList.contains('is-active');
-    favoriteButton.setAttribute('aria-label', active ? 'Remove from wishlist' : 'Add to wishlist');
-    showToast(active ? 'Saved to wishlist' : 'Removed from wishlist');
-  });
-}
-
-const floorSections = Array.from(document.querySelectorAll('[data-floor-section]'));
-if ('IntersectionObserver' in window && floorSections.length) {
-  const observer = new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-    if (!visible) return;
-    const floor = visible.target.dataset.floorSection;
-    setActiveFloor(floor);
-  }, {
-    root: null,
-    threshold: [0.25, 0.45, 0.65],
-    rootMargin: '-24% 0px -42% 0px'
-  });
-
-  floorSections.forEach((section) => observer.observe(section));
-}
-
-window.addEventListener('scroll', requestScrollUpdate, { passive: true });
-window.addEventListener('resize', requestScrollUpdate);
-updateScrollProgress();
