@@ -25,7 +25,11 @@ body::-webkit-scrollbar {
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--paper);
+  background-color: rgb(132, 199, 243);
+  background-image: url(assets/BackgroundProductPage.png);
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.4;
