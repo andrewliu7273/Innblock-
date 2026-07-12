@@ -1,0 +1,179 @@
+{
+  "sections": {
+    "innblock_home": {
+      "type": "innblock-home",
+      "blocks": {
+        "living_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Living InnBlock",
+            "fallback_price": 64,
+            "tower": "a",
+            "floor": 1,
+            "room_type": "living",
+            "category": "base",
+            "theme": "home"
+          }
+        },
+        "bedroom_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Bedroom InnBlock",
+            "fallback_price": 62,
+            "tower": "a",
+            "floor": 2,
+            "room_type": "living",
+            "category": "base",
+            "theme": "home"
+          }
+        },
+        "entry_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Entry InnBlock",
+            "fallback_price": 54,
+            "tower": "a",
+            "floor": 3,
+            "room_type": "display",
+            "category": "theme",
+            "theme": "home"
+          }
+        },
+        "kitchen_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Kitchen InnBlock",
+            "fallback_price": 68,
+            "tower": "b",
+            "floor": 1,
+            "room_type": "living",
+            "category": "base",
+            "theme": "home"
+          }
+        },
+        "studio_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Studio InnBlock",
+            "fallback_price": 66,
+            "tower": "b",
+            "floor": 2,
+            "room_type": "display",
+            "category": "theme",
+            "theme": "studio"
+          }
+        },
+        "pantry_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Pantry InnBlock",
+            "fallback_price": 56,
+            "tower": "b",
+            "floor": 3,
+            "room_type": "utility",
+            "category": "theme",
+            "theme": "shop"
+          }
+        },
+        "bathroom_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Bathroom InnBlock",
+            "fallback_price": 60,
+            "tower": "c",
+            "floor": 1,
+            "room_type": "living",
+            "category": "base",
+            "theme": "home"
+          }
+        },
+        "laundry_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Laundry InnBlock",
+            "fallback_price": 58,
+            "tower": "c",
+            "floor": 2,
+            "room_type": "utility",
+            "category": "base",
+            "theme": "home"
+          }
+        },
+        "mechanical_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Mechanical InnBlock",
+            "fallback_price": 52,
+            "tower": "c",
+            "floor": 3,
+            "room_type": "utility",
+            "category": "theme",
+            "theme": "studio"
+          }
+        },
+        "collector_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Collector InnBlock",
+            "fallback_price": 70,
+            "tower": "d",
+            "floor": 1,
+            "room_type": "display",
+            "category": "collector",
+            "theme": "studio"
+          }
+        },
+        "storage_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Storage InnBlock",
+            "fallback_price": 55,
+            "tower": "d",
+            "floor": 2,
+            "room_type": "utility",
+            "category": "collector",
+            "theme": "shop"
+          }
+        },
+        "balcony_innblock": {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Balcony InnBlock",
+            "fallback_price": 59,
+            "tower": "d",
+            "floor": 3,
+            "room_type": "display",
+            "category": "collector",
+            "theme": "home"
+          }
+        }
+      },
+      "block_order": [
+        "living_innblock",
+        "bedroom_innblock",
+        "entry_innblock",
+        "kitchen_innblock",
+        "studio_innblock",
+        "pantry_innblock",
+        "bathroom_innblock",
+        "laundry_innblock",
+        "mechanical_innblock",
+        "collector_innblock",
+        "storage_innblock",
+        "balcony_innblock"
+      ],
+      "settings": {
+        "show_header": true,
+        "brand_text": "INNBLOCK",
+        "section_label": "Rooms",
+        "heading": "Build Your InnBlock Stack",
+        "intro_copy": "Scrollable apartment-style store homepage.",
+        "tower_a_title": "Tower A",
+        "tower_b_title": "Tower B",
+        "tower_c_title": "Tower C",
+        "tower_d_title": "Tower D"
+      }
+    }
+  },
+  "order": ["innblock_home"]
+}

@@ -1,0 +1,625 @@
+{{ 'innblock-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'innblock-home.js' | asset_url }}" defer="defer"></script>
+
+{% liquid
+  assign section_heading_id = 'InnblockHomeTitle-' | append: section.id
+  assign towers = 'a,b,c,d' | split: ','
+%}
+
+<section
+  class="innblock-home"
+  data-innblock-home
+  style="--innblock-bg-image: url('{{ 'BackgroundProductPage.png' | asset_url }}');"
+  aria-labelledby="{{ section_heading_id }}"
+>
+  {% if section.settings.show_header %}
+    <header class="innblock-site-header" aria-label="Primary navigation">
+      <a class="innblock-brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
+        {% if section.settings.logo != blank %}
+          {{
+            section.settings.logo
+            | image_url: width: 84
+            | image_tag: class: 'innblock-brand-image', alt: shop.name
+          }}
+        {% else %}
+          <span class="innblock-brand-mark" aria-hidden="true"></span>
+        {% endif %}
+        <span>{{ section.settings.brand_text | escape }}</span>
+      </a>
+
+      <nav class="innblock-primary-nav" aria-label="Shop categories">
+        {% if section.settings.menu != blank and section.settings.menu.links.size > 0 %}
+          {% for link in section.settings.menu.links %}
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          {% endfor %}
+        {% else %}
+          <a href="#new-rooms">New Rooms</a>
+          <a href="#kits">Kits</a>
+          <a href="#accessories">Accessories</a>
+          <a href="#characters">Characters</a>
+          <a href="#pickup">Pickup</a>
+          <a href="#about">About</a>
+        {% endif %}
+      </nav>
+
+      <div class="innblock-header-actions" aria-label="Shopping tools">
+        <a class="innblock-text-control" href="{{ routes.search_url }}">Search</a>
+        <a class="innblock-text-control" href="{{ routes.cart_url }}">
+          Cart <span data-innblock-cart-count>{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </header>
+  {% endif %}
+
+  <main class="innblock-product-page">
+    <section class="innblock-page-intro" aria-labelledby="{{ section_heading_id }}">
+      <div>
+        <p class="innblock-section-label">{{ section.settings.section_label | escape }}</p>
+        <h1 class="innblock-title" id="{{ section_heading_id }}">
+          {{ section.settings.heading | escape }}
+        </h1>
+        {% if section.settings.intro_copy != blank %}
+          <p class="innblock-intro-copy">{{ section.settings.intro_copy | escape }}</p>
+        {% endif %}
+      </div>
+
+      <form class="innblock-filter-bar" aria-label="Product filters">
+        <label>
+          <span>Room Type</span>
+          <select data-innblock-room-filter>
+            <option value="all">All Rooms</option>
+            <option value="living">Living</option>
+            <option value="utility">Utility</option>
+            <option value="display">Display</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Category</span>
+          <select data-innblock-category-filter>
+            <option value="all">Category</option>
+            <option value="base">Base Rooms</option>
+            <option value="theme">Theme Rooms</option>
+            <option value="collector">Collector Rooms</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Theme</span>
+          <select data-innblock-theme-filter>
+            <option value="all">Theme</option>
+            <option value="home">Home</option>
+            <option value="studio">Studio</option>
+            <option value="shop">Shop</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Sort</span>
+          <select data-innblock-sort-filter>
+            <option value="featured">Sort: Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name</option>
+          </select>
+        </label>
+      </form>
+    </section>
+
+    <section class="innblock-wireframe-shell" aria-label="Innblock apartment product grid">
+      <div class="innblock-tower-grid" data-innblock-tower-grid>
+        {% for tower_key in towers %}
+          {% liquid
+            case tower_key
+              when 'a'
+                assign tower_title = section.settings.tower_a_title
+              when 'b'
+                assign tower_title = section.settings.tower_b_title
+              when 'c'
+                assign tower_title = section.settings.tower_c_title
+              when 'd'
+                assign tower_title = section.settings.tower_d_title
+            endcase
+
+            assign tower_count = 0
+            for block in section.blocks
+              if block.type == 'room' and block.settings.tower == tower_key
+                assign tower_count = tower_count | plus: 1
+              endif
+            endfor
+          %}
+
+          <section
+            class="innblock-tower"
+            id="innblock-{{ section.id }}-tower-{{ tower_key }}"
+            data-innblock-tower
+            data-tower="{{ tower_key }}"
+            aria-labelledby="innblock-{{ section.id }}-tower-{{ tower_key }}-title"
+            {% if tower_count == 0 %}
+              hidden
+            {% endif %}
+          >
+            <header class="innblock-tower-header">
+              <span id="innblock-{{ section.id }}-tower-{{ tower_key }}-title">
+                {{ tower_title | escape }}
+              </span>
+              <span data-innblock-tower-count>
+                {{ tower_count }} {% if tower_count == 1 %}room{% else %}rooms{% endif %}
+              </span>
+            </header>
+
+            <div class="innblock-room-list" data-innblock-room-list>
+              {% for block in section.blocks %}
+                {% if block.type == 'room' and block.settings.tower == tower_key %}
+                  {% liquid
+                    assign product_ref = block.settings.product
+                    assign card_title = block.settings.fallback_title
+                    assign price_cents = block.settings.fallback_price | times: 100
+                    assign price_display = price_cents | money_without_trailing_zeros
+                    assign variant_id = ''
+                    assign product_available = false
+                    assign image_ref = block.settings.image
+
+                    if product_ref != blank
+                      assign card_title = product_ref.title
+                      assign price_cents = product_ref.price
+                      assign price_display = product_ref.price | money
+                      assign variant_ref = product_ref.selected_or_first_available_variant
+                      assign variant_id = variant_ref.id
+                      assign product_available = product_ref.available
+
+                      if image_ref == blank and product_ref.featured_image != blank
+                        assign image_ref = product_ref.featured_image
+                      endif
+                    endif
+                  %}
+
+                  <article
+                    class="innblock-product-card"
+                    id="InnblockRoom-{{ block.id }}"
+                    data-innblock-room
+                    data-floor="{{ block.settings.floor }}"
+                    data-product-id="{{ block.id }}"
+                    data-room-type="{{ block.settings.room_type | escape }}"
+                    data-category="{{ block.settings.category | escape }}"
+                    data-theme="{{ block.settings.theme | escape }}"
+                    data-price-cents="{{ price_cents }}"
+                    data-name="{{ card_title | escape }}"
+                    data-tower="{{ tower_key }}"
+                    {% if variant_id != blank %}
+                      data-variant-id="{{ variant_id }}"
+                    {% endif %}
+                    aria-labelledby="InnblockRoomTitle-{{ block.id }}"
+                    {{ block.shopify_attributes }}
+                  >
+                    <div class="innblock-image-slot">
+                      {% if image_ref != blank %}
+                        {{
+                          image_ref
+                          | image_url: width: 900
+                          | image_tag: class: 'innblock-room-image', loading: 'lazy', alt: card_title
+                        }}
+                      {% else %}
+                        <span>
+                          Future room image asset area<br>
+                          {{ tower_title | escape }} / Floor {{ block.settings.floor }}
+                        </span>
+                      {% endif %}
+                    </div>
+
+                    <aside class="innblock-product-info" aria-label="{{ card_title | escape }} purchase options">
+                      <p class="innblock-floor-label">Floor {{ block.settings.floor }}</p>
+                      <h2 class="innblock-product-name" id="InnblockRoomTitle-{{ block.id }}">
+                        {{ card_title | escape }}
+                      </h2>
+                      <p class="innblock-price">{{ price_display }}</p>
+                      <div class="innblock-product-actions">
+                        {% if product_ref != blank %}
+                          <button
+                            class="innblock-product-button"
+                            type="button"
+                            data-innblock-add
+                            data-default-text="{% if product_available %}Add to cart{% else %}Sold out{% endif %}"
+                            {% unless product_available %}
+                              disabled
+                            {% endunless %}
+                          >
+                            {% if product_available %}Add to cart{% else %}Sold out{% endif %}
+                          </button>
+                        {% else %}
+                          <button
+                            class="innblock-product-button"
+                            type="button"
+                            data-innblock-add
+                            data-default-text="Add product"
+                            disabled
+                          >
+                            Add product
+                          </button>
+                        {% endif %}
+
+                        <button type="button" aria-pressed="false" data-innblock-favorite>
+                          Favorite
+                        </button>
+                      </div>
+                    </aside>
+                  </article>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </section>
+        {% endfor %}
+
+        <p class="innblock-empty-state" data-innblock-empty hidden>
+          No rooms match the selected filters.
+        </p>
+      </div>
+
+      <aside class="innblock-elevator" aria-label="Page elevator navigation">
+        <button class="innblock-elevator-button" type="button" data-innblock-elevator="up">
+          Up
+        </button>
+        <div class="innblock-elevator-rail" data-innblock-elevator-rail aria-hidden="true">
+          <span class="innblock-elevator-car" data-innblock-elevator-car>1</span>
+        </div>
+        <p class="innblock-floor-readout">
+          Floor <span data-innblock-current-floor>1</span>/<span data-innblock-total-floors>3</span>
+        </p>
+        <button class="innblock-elevator-button" type="button" data-innblock-elevator="down">
+          Down
+        </button>
+      </aside>
+    </section>
+  </main>
+</section>
+
+{% schema %}
+{
+  "name": "Innblock home",
+  "tag": "section",
+  "class": "section-innblock-home",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show Innblock header",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand text",
+      "default": "INNBLOCK"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Header menu"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section label",
+      "default": "Rooms"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Build Your InnBlock Stack"
+    },
+    {
+      "type": "textarea",
+      "id": "intro_copy",
+      "label": "Intro copy",
+      "default": "Scrollable apartment-style store homepage."
+    },
+    {
+      "type": "text",
+      "id": "tower_a_title",
+      "label": "Tower A title",
+      "default": "Tower A"
+    },
+    {
+      "type": "text",
+      "id": "tower_b_title",
+      "label": "Tower B title",
+      "default": "Tower B"
+    },
+    {
+      "type": "text",
+      "id": "tower_c_title",
+      "label": "Tower C title",
+      "default": "Tower C"
+    },
+    {
+      "type": "text",
+      "id": "tower_d_title",
+      "label": "Tower D title",
+      "default": "Tower D"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "room",
+      "name": "Room",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Shopify product"
+        },
+        {
+          "type": "text",
+          "id": "fallback_title",
+          "label": "Fallback title",
+          "default": "Living InnBlock"
+        },
+        {
+          "type": "range",
+          "id": "fallback_price",
+          "label": "Fallback price",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 64
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Override image"
+        },
+        {
+          "type": "select",
+          "id": "tower",
+          "label": "Tower",
+          "options": [
+            {
+              "value": "a",
+              "label": "Tower A"
+            },
+            {
+              "value": "b",
+              "label": "Tower B"
+            },
+            {
+              "value": "c",
+              "label": "Tower C"
+            },
+            {
+              "value": "d",
+              "label": "Tower D"
+            }
+          ],
+          "default": "a"
+        },
+        {
+          "type": "range",
+          "id": "floor",
+          "label": "Floor",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "select",
+          "id": "room_type",
+          "label": "Room type",
+          "options": [
+            {
+              "value": "living",
+              "label": "Living"
+            },
+            {
+              "value": "utility",
+              "label": "Utility"
+            },
+            {
+              "value": "display",
+              "label": "Display"
+            }
+          ],
+          "default": "living"
+        },
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "options": [
+            {
+              "value": "base",
+              "label": "Base rooms"
+            },
+            {
+              "value": "theme",
+              "label": "Theme rooms"
+            },
+            {
+              "value": "collector",
+              "label": "Collector rooms"
+            }
+          ],
+          "default": "base"
+        },
+        {
+          "type": "select",
+          "id": "theme",
+          "label": "Theme",
+          "options": [
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "studio",
+              "label": "Studio"
+            },
+            {
+              "value": "shop",
+              "label": "Shop"
+            }
+          ],
+          "default": "home"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Innblock home",
+      "blocks": [
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Living InnBlock",
+            "fallback_price": 64,
+            "tower": "a",
+            "floor": 1,
+            "room_type": "living",
+            "category": "base",
+            "theme": "home"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Bedroom InnBlock",
+            "fallback_price": 62,
+            "tower": "a",
+            "floor": 2,
+            "room_type": "living",
+            "category": "base",
+            "theme": "home"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Entry InnBlock",
+            "fallback_price": 54,
+            "tower": "a",
+            "floor": 3,
+            "room_type": "display",
+            "category": "theme",
+            "theme": "home"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Kitchen InnBlock",
+            "fallback_price": 68,
+            "tower": "b",
+            "floor": 1,
+            "room_type": "living",
+            "category": "base",
+            "theme": "home"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Studio InnBlock",
+            "fallback_price": 66,
+            "tower": "b",
+            "floor": 2,
+            "room_type": "display",
+            "category": "theme",
+            "theme": "studio"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Pantry InnBlock",
+            "fallback_price": 56,
+            "tower": "b",
+            "floor": 3,
+            "room_type": "utility",
+            "category": "theme",
+            "theme": "shop"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Bathroom InnBlock",
+            "fallback_price": 60,
+            "tower": "c",
+            "floor": 1,
+            "room_type": "living",
+            "category": "base",
+            "theme": "home"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Laundry InnBlock",
+            "fallback_price": 58,
+            "tower": "c",
+            "floor": 2,
+            "room_type": "utility",
+            "category": "base",
+            "theme": "home"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Mechanical InnBlock",
+            "fallback_price": 52,
+            "tower": "c",
+            "floor": 3,
+            "room_type": "utility",
+            "category": "theme",
+            "theme": "studio"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Collector InnBlock",
+            "fallback_price": 70,
+            "tower": "d",
+            "floor": 1,
+            "room_type": "display",
+            "category": "collector",
+            "theme": "studio"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Storage InnBlock",
+            "fallback_price": 55,
+            "tower": "d",
+            "floor": 2,
+            "room_type": "utility",
+            "category": "collector",
+            "theme": "shop"
+          }
+        },
+        {
+          "type": "room",
+          "settings": {
+            "fallback_title": "Balcony InnBlock",
+            "fallback_price": 59,
+            "tower": "d",
+            "floor": 3,
+            "room_type": "display",
+            "category": "collector",
+            "theme": "home"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

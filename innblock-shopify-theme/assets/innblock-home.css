@@ -1,0 +1,431 @@
+.innblock-home {
+  --innblock-ink: #000;
+  --innblock-paper: #fff;
+  --innblock-line: 1px solid var(--innblock-ink);
+  --innblock-header-height: 74px;
+  --innblock-page-padding: clamp(20px, 4vw, 48px);
+  --innblock-tower-gap: 22px;
+  --innblock-floor-height: 236px;
+
+  min-height: 100vh;
+  color: var(--innblock-ink);
+  background-color: rgb(132, 199, 243);
+  background-image: var(--innblock-bg-image);
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.innblock-home *,
+.innblock-home *::before,
+.innblock-home *::after {
+  box-sizing: border-box;
+}
+
+.innblock-home button,
+.innblock-home select {
+  color: inherit;
+  background: var(--innblock-paper);
+  border: var(--innblock-line);
+  border-radius: 0;
+  font: inherit;
+}
+
+.innblock-home button {
+  cursor: pointer;
+}
+
+.innblock-home button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.innblock-home a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.innblock-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: center;
+  min-height: var(--innblock-header-height);
+  padding: 12px var(--innblock-page-padding);
+  background: var(--innblock-paper);
+  border-bottom: var(--innblock-line);
+}
+
+.innblock-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 180px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.innblock-brand-mark,
+.innblock-brand-image {
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  border: var(--innblock-line);
+}
+
+.innblock-brand-image {
+  object-fit: contain;
+}
+
+.innblock-primary-nav {
+  display: flex;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 34px);
+  font-size: 15px;
+}
+
+.innblock-primary-nav a {
+  padding: 8px 0;
+}
+
+.innblock-header-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.innblock-text-control {
+  min-height: 38px;
+  padding: 7px 16px;
+}
+
+.innblock-text-control + .innblock-text-control {
+  margin-left: -1px;
+}
+
+.innblock-product-page {
+  padding: 32px var(--innblock-page-padding) 64px;
+}
+
+.innblock-page-intro {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(420px, 0.95fr);
+  gap: 32px;
+  align-items: end;
+  margin-bottom: 34px;
+}
+
+.innblock-section-label {
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.innblock-title {
+  max-width: 620px;
+  margin: 0;
+  font-size: 52px;
+  line-height: 1.06;
+  letter-spacing: 0;
+}
+
+.innblock-intro-copy {
+  max-width: 620px;
+  margin: 10px 0 0;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.innblock-filter-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 18px;
+}
+
+.innblock-filter-bar label {
+  display: block;
+}
+
+.innblock-filter-bar span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.innblock-filter-bar select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+}
+
+.innblock-wireframe-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 104px;
+  gap: 24px;
+  align-items: start;
+}
+
+.innblock-tower-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(230px, 1fr));
+  gap: var(--innblock-tower-gap);
+  align-items: start;
+}
+
+.innblock-tower {
+  border: var(--innblock-line);
+  background: var(--innblock-paper);
+}
+
+.innblock-tower[hidden],
+.innblock-product-card[hidden],
+.innblock-empty-state[hidden] {
+  display: none !important;
+}
+
+.innblock-tower-header {
+  position: sticky;
+  top: var(--innblock-header-height);
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 42px;
+  padding: 8px 12px;
+  background: var(--innblock-paper);
+  border-bottom: var(--innblock-line);
+  font-weight: 700;
+}
+
+.innblock-tower-header span:last-child {
+  font-weight: 400;
+}
+
+.innblock-product-card {
+  display: grid;
+  grid-template-columns: minmax(132px, 1fr) minmax(106px, 34%);
+  min-height: var(--innblock-floor-height);
+  border-bottom: var(--innblock-line);
+}
+
+.innblock-product-card:last-child {
+  border-bottom: 0;
+}
+
+.innblock-image-slot {
+  display: grid;
+  place-items: center;
+  min-height: var(--innblock-floor-height);
+  padding: 16px;
+  text-align: center;
+  font-size: 15px;
+  border-right: var(--innblock-line);
+}
+
+.innblock-room-image {
+  display: block;
+  width: 100%;
+  max-height: calc(var(--innblock-floor-height) - 32px);
+  object-fit: contain;
+}
+
+.innblock-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 18px 10px 12px;
+}
+
+.innblock-floor-label {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.innblock-product-name {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.innblock-price {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.innblock-product-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.innblock-product-actions button {
+  min-height: 38px;
+  padding: 7px 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.innblock-product-actions button[aria-pressed="true"] {
+  outline: 2px solid var(--innblock-ink);
+  outline-offset: -5px;
+}
+
+.innblock-elevator {
+  position: sticky;
+  top: calc(var(--innblock-header-height) + 24px);
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  border: var(--innblock-line);
+  background: var(--innblock-paper);
+}
+
+.innblock-elevator-button {
+  min-height: 36px;
+  padding: 6px;
+}
+
+.innblock-elevator-rail {
+  position: relative;
+  height: 420px;
+  border: var(--innblock-line);
+}
+
+.innblock-elevator-car {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  left: 8px;
+  display: grid;
+  place-items: center;
+  height: 52px;
+  border: var(--innblock-line);
+  background: var(--innblock-paper);
+  font-size: 20px;
+  font-weight: 700;
+  transition: top 160ms ease, left 160ms ease;
+}
+
+.innblock-floor-readout {
+  margin: 0;
+  padding: 10px 6px;
+  text-align: center;
+  border: var(--innblock-line);
+  text-transform: uppercase;
+}
+
+.innblock-empty-state {
+  grid-column: 1 / -1;
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+  margin: 0;
+  border: var(--innblock-line);
+  background: var(--innblock-paper);
+  text-align: center;
+}
+
+@media (max-width: 1220px) {
+  .innblock-site-header {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .innblock-brand,
+  .innblock-primary-nav,
+  .innblock-header-actions {
+    justify-content: center;
+  }
+
+  .innblock-page-intro {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .innblock-tower-grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .innblock-title {
+    font-size: 36px;
+  }
+
+  .innblock-product-page {
+    padding-bottom: 132px;
+  }
+
+  .innblock-primary-nav {
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+
+  .innblock-filter-bar,
+  .innblock-tower-grid,
+  .innblock-wireframe-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .innblock-wireframe-shell {
+    gap: 18px;
+  }
+
+  .innblock-product-card {
+    grid-template-columns: minmax(0, 1fr) minmax(118px, 38%);
+  }
+
+  .innblock-elevator {
+    position: fixed;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    grid-template-columns: 72px 1fr 90px 72px;
+    align-items: center;
+    border-right: 0;
+    border-left: 0;
+  }
+
+  .innblock-elevator-rail {
+    height: 42px;
+  }
+
+  .innblock-elevator-car {
+    top: 5px;
+    right: auto;
+    bottom: 5px;
+    left: 0;
+    width: 52px;
+    height: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .innblock-product-card {
+    grid-template-columns: 1fr;
+  }
+
+  .innblock-image-slot {
+    min-height: 170px;
+    border-right: 0;
+    border-bottom: var(--innblock-line);
+  }
+
+  .innblock-product-info {
+    min-height: 174px;
+  }
+}
