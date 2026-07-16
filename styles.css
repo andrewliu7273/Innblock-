@@ -322,6 +322,42 @@ h1 {
   text-align: center;
 }
 
+/* background clouds moving behind everything from right to left */
+.background-cloud-container {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.background-cloud-track {
+  position: absolute;
+  display: flex;
+  width: max-content;
+  top: -100px;
+
+  /* change to 400s for finalized version */
+  animation: moveBackgroundClouds 40s linear infinite;
+}
+
+.cloud {
+  width: 100rem;
+  height: 60rem;
+  flex-shrink: 0;
+}
+
+@keyframes moveBackgroundClouds {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (max-width: 1220px) {
   .site-header {
     grid-template-columns: 1fr;
