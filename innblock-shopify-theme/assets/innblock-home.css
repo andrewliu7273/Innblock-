@@ -17,6 +17,9 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.4;
+  isolation: isolate;
+  overflow-x: hidden;
+  position: relative;
 }
 
 .innblock-home *,
@@ -109,6 +112,8 @@
 }
 
 .innblock-product-page {
+  position: relative;
+  z-index: 1;
   padding: 32px var(--innblock-page-padding) 64px;
 }
 
@@ -335,6 +340,38 @@
   border: var(--innblock-line);
   background: var(--innblock-paper);
   text-align: center;
+}
+
+.innblock-background-cloud-container {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.innblock-background-cloud-track {
+  position: absolute;
+  top: -100px;
+  display: flex;
+  width: max-content;
+  animation: innblockMoveBackgroundClouds 40s linear infinite;
+}
+
+.innblock-cloud {
+  width: 100rem;
+  height: 60rem;
+  flex-shrink: 0;
+}
+
+@keyframes innblockMoveBackgroundClouds {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (max-width: 1220px) {
