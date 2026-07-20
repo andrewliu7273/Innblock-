@@ -203,11 +203,59 @@ h1 {
 }
 
 .product-card {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(132px, 1fr) minmax(106px, 34%);
   min-height: var(--floor-height);
-  border-bottom: var(--line);
+  /* border-bottom: var(--line); */
+
+  padding: 4rem;
+  
 }
+
+.product-frame {
+    position: absolute;
+    /* inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center; */
+
+    top: -12%;
+    left: -8%;
+    width: 115%;
+    height: 110%;
+
+    object-fit: FILL;
+
+    pointer-events: none;
+    z-index: 0;
+}
+
+.image-slot,
+.product-info {
+    position: relative;
+    z-index: 1;
+}
+
+/* .product-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: url("assets/innblock-product-card-frame-v2.webp") center/100% 100% no-repeat;
+    background-size: 120%;
+
+    pointer-events: none;
+    z-index: 0;
+}
+
+.product-card > * {
+    position: relative;
+    z-index: 1;
+} */
 
 .product-card:last-child {
   border-bottom: 0;
@@ -220,7 +268,7 @@ h1 {
   padding: 16px;
   text-align: center;
   font-size: 15px;
-  border-right: var(--line);
+  /* border-right: var(--line); */
 }
 
 .product-info {
@@ -336,19 +384,47 @@ h1 {
   position: absolute;
   display: flex;
   width: max-content;
-  top: -100px;
+  top: -10%;
 
-  /* change to 400s for finalized version */
-  animation: moveBackgroundClouds 40s linear infinite;
+  /* moves slow in the back */
+  animation: moveClouds 500s linear infinite;
 }
 
-.cloud {
+.background-cloud {
   width: 100rem;
   height: 60rem;
   flex-shrink: 0;
+  filter: blur(1px);
 }
 
-@keyframes moveBackgroundClouds {
+/* transparent clouds moving quick in front of the apartments*/
+.foreground-cloud-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 9999;
+}
+
+.foreground-cloud-track {
+  position: absolute;
+  display: flex;
+  width: max-content;
+  top: -5%;
+
+  /* moves slightly faster than background clouds */
+  animation: moveClouds 100s linear infinite;
+}
+
+.foreground-cloud {
+  width: 180rem;
+  max-height: 100%;
+  height: auto;
+  opacity: 0.4; 
+}
+
+@keyframes moveClouds {
   from {
     transform: translateX(0);
   }
