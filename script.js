@@ -192,7 +192,7 @@ function renderProductCard(room, towerTitle) {
   article.setAttribute("aria-labelledby", `${room.id}-title`);
 
   article.innerHTML = `
-    <img class="product-frame" src="assets/innblock-product-card-frame-v2.webp" alt="Product Frame" aria-hidden="true">
+    <img class="product-frame" src="assets/innblock-product-card-frame-cropped.webp" alt="Product Frame" aria-hidden="true">
     <div class="image-slot">
       <span>Future room image asset area<br>${towerTitle} / Floor ${room.floor}</span>
     </div>
