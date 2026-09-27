@@ -306,40 +306,31 @@ h1 {
   outline-offset: -5px;
 }
 
-.elevator {
-  position: sticky;
-  top: calc(var(--header-height) + 24px);
-  display: grid;
-  gap: 10px;
-  padding: 10px;
-  border: var(--line);
-  background: var(--paper);
-}
+/* Scrollbar track */
+.elevator-scrollbar {
+  position: fixed;
+  top: 15vh;
+  right: 20px;
 
-.elevator-button {
-  min-height: 36px;
-  padding: 6px;
-}
+  width: 60px;
+  height: 70vh;
 
-.elevator-rail {
-  position: relative;
-  height: 420px;
-  border: var(--line);
+  z-index: 9999;
+  pointer-events: none;
 }
 
 .elevator-car {
   position: absolute;
-  left: 8px;
-  right: 8px;
   top: 0;
-  display: grid;
-  place-items: center;
-  height: 52px;
-  border: var(--line);
-  background: var(--paper);
-  font-size: 20px;
-  font-weight: 700;
-  transition: top 160ms ease;
+  left: 0;
+
+  width: 60px;
+  height: auto;
+
+  object-fit: contain;
+
+  will-change: transform;
+  transition: transform 0.08s linear;
 }
 
 .floor-readout {
