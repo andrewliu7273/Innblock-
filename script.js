@@ -125,15 +125,8 @@
       control.addEventListener("change", updateFilters);
     });
 
-    // Set initial position
-    // updateElevator();
-    window.addEventListener("scroll", updateElevator, { passive: true });
-    window.addEventListener("resize", updateElevator);
-    // updateElevator();
-
+    renderElevator();
   }
-
-
 
   const towerGrid = document.querySelector("#tower-grid");
   const cartCount = document.querySelector("[data-cart-count]");
@@ -141,17 +134,20 @@
   const categoryFilter = document.querySelector("#category-filter");
   const themeFilter = document.querySelector("#theme-filter");
   const sortFilter = document.querySelector("#sort-filter");
-  // const elevatorCar = document.querySelector("#elevator-car");
-  // const currentFloor = document.querySelector("#current-floor");
+
   // const totalFloors = document.querySelector("#total-floors");
   // const elevatorRail = document.querySelector(".elevator-rail");
   // const elevatorButtons = document.querySelectorAll("[data-elevator]");
 
-  const floorCount = Math.max(
-    ...towers.flatMap((tower) => tower.rooms.map((room) => room.floor))
-  );
-
-  totalFloors.textContent = floorCount;
+  // elevator variables
+  const elevator = document.getElementById("elevator-car");
+  const track = document.querySelector(".elevator-scrollbar");
+  const openDoor = "assets/elevator-open-transparent.png";
+  const closedDoor = "assets/innblock-elevator-closed.png";
+  let currentPosition = 0;
+  let targetPosition = 0;
+  let scrollStopTimer;
+  let isSnapping = false;
 
   function getFilteredRooms(rooms) {
     return rooms
@@ -241,7 +237,6 @@
     }
 
     bindProductActions();
-    updateElevator();
   }
 
   function bindProductActions() {
@@ -277,29 +272,108 @@
     renderTowers();
   }
 
-function updateElevator() {
-  const elevator = document.getElementById("elevator-car");
-  const elevatorTrack = document.querySelector(".elevator-scrollbar");
-  const scrollTop = window.scrollY;
+  function renderElevator() {
+    window.addEventListener("scroll", () => {
+      updateTarget();
+      scrollingStarted();
+    }, { passive: true });
 
-  // Total amount the page can scroll
-  const maxScroll =
-    document.documentElement.scrollHeight - window.innerHeight;
+    window.addEventListener("resize", updateTarget);
 
-  // Distance the elevator can travel
-  const trackHeight = elevatorTrack.clientHeight;
-  const elevatorHeight = elevator.offsetHeight;
+    updateTarget();
+    animateElevator();
+  }
 
-  const maxTravel = Math.max(0, trackHeight - elevatorHeight);
+  // updates location of the elevator
+  function updateTarget() {
+    const maxScroll =
+      document.documentElement.scrollHeight - window.innerHeight;
 
-  // Scroll progress from 0 to 1
-  const progress = maxScroll > 0
-    ? Math.min(1, Math.max(0, scrollTop / maxScroll))
-    : 0;
+    const trackHeight = track.clientHeight;
+    const elevatorHeight = elevator.offsetHeight;
 
-  // Move the elevator according to scroll progress
-  elevator.style.transform =
-    `translateY(${progress * maxTravel}px)`;
-}
+    const maxTravel = Math.max(
+      0,
+      trackHeight - elevatorHeight
+    );
+
+    const progress = maxScroll > 0
+      ? window.scrollY / maxScroll
+      : 0;
+
+    targetPosition = progress * maxTravel;
+  }
+
+  // animate eleavtor movement
+  function animateElevator() {
+    // Smoothness — higher = faster response
+    currentPosition +=
+      (targetPosition - currentPosition) * 0.08;
+
+    elevator.style.transform =
+      `translate3d(0, ${currentPosition}px, 0)`;
+
+    requestAnimationFrame(animateElevator);
+  }
+
+  // max distance elevator can travel
+  function getMaxTravel() {
+    return Math.max(
+      0,
+      track.clientHeight - elevator.offsetHeight
+    );
+  }
+
+  //snaps elevator to nearest floor of the tower
+  function snapToNearestFloor() {
+    const maxTravel = getMaxTravel();
+
+    // 3 floors = 3 possible elevator positions
+    const floorCount = 3;
+
+    const floorSpacing =
+      maxTravel / (floorCount - 1);
+
+    // Find closest floor
+    const nearestFloor = Math.round(
+      currentPosition / floorSpacing
+    );
+
+    const snappedPosition =
+      nearestFloor * floorSpacing;
+
+    isSnapping = true;
+
+    // Close enough to the floor → snap there
+    targetPosition = snappedPosition;
+
+    // Wait for the elevator to visually arrive
+    setTimeout(() => {
+      currentPosition = snappedPosition;
+      targetPosition = snappedPosition;
+
+      elevator.style.transform =
+        `translate3d(0, ${snappedPosition}px, 0)`;
+
+      // Open doors
+      elevator.src = openDoor;
+
+      isSnapping = false;
+    }, 350);
+  }
+
+  // update elevator image when scrolling
+  function scrollingStarted() {
+    // Close doors while moving
+    elevator.src = closedDoor;
+
+    // Reset the timer every time scrolling continues
+    clearTimeout(scrollStopTimer);
+
+    // Wait until scrolling actually stops
+    scrollStopTimer = setTimeout(() => {
+      snapToNearestFloor();
+    }, 200);
+  }
 
 })();

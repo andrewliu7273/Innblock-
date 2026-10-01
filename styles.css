@@ -309,11 +309,11 @@ h1 {
 /* Scrollbar track */
 .elevator-scrollbar {
   position: fixed;
-  top: 15vh;
-  right: 20px;
+  top: 30vh;
+  right: -10px;
 
   width: 60px;
-  height: 70vh;
+  height: 65vh;
 
   z-index: 9999;
   pointer-events: none;
@@ -330,7 +330,7 @@ h1 {
   object-fit: contain;
 
   will-change: transform;
-  transition: transform 0.08s linear;
+  /* transition: transform 0.08s linear; */
 }
 
 .floor-readout {
